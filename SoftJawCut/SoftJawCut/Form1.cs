@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SoftJawCut
@@ -44,7 +38,7 @@ namespace SoftJawCut
         {
             if ( saveDiag.ShowDialog() == DialogResult.OK )
             {
-                txtOutFile.Text = saveDiag.FileName;
+                txtOutFile.Text = saveDiag.FileName; 
             }
         }
 

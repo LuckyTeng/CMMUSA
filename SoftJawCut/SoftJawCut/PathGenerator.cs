@@ -9,12 +9,12 @@ namespace SoftJawCut
     /// </summary>
     public class PathArgument
     {
-        public int RoughDia;   // thouzandth inch
-        public int FinishDia;  // thouzandth inch
-        public int Deep;       // thouzandth inch
-        public int UpSize;     // thouzandth inch
-        public int DownSize;   // thouzandth inch
-        public int CutLength;  // thouzandth inch
+        public int RoughDia;   // thousandth inch
+        public int FinishDia;  // thousandth inch
+        public int Deep;       // thousandth inch
+        public int UpSize;     // thousandth inch
+        public int DownSize;   // thousandth inch
+        public int CutLength;  // thousandth inch
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ namespace SoftJawCut
             mcs.Add(new ToolChangeCommand { ToolNumber = 10 });
 
             // spindle on, coolant on
-            mcs.Add(new SpindleOnCommand { RPM = getRPM(pathArgument) });
+            mcs.Add(new SpindleOnCommand { RPM = getRoughRPM(pathArgument) });
             mcs.Add(new CoolantOnCommand());
 
             // init pos
@@ -131,7 +131,7 @@ namespace SoftJawCut
             double initZ = 0.0;
             double targetY = sign * (cd == CutDir.Top ? pathArgument.UpSize : pathArgument.DownSize) / 1000.0;
             double initX = -0.500;
-            double yStep = sign * (pathArgument.RoughDia - STEP_OVER_Y) / 1000.0; // step to go
+            double yStep = sign * (pathArgument.FinishDia - STEP_OVER_Y) / 1000.0; // step to go
             double targetZ = -pathArgument.Deep / 1000.0;
             int xDirection = 0; // 0 to right 1 to left
 
@@ -241,6 +241,7 @@ namespace SoftJawCut
 
             // deep loop
             while (true)
+
             {
                 if (initZ <= targetZ) // reach target
                     break;
@@ -302,24 +303,30 @@ namespace SoftJawCut
             }
         }
 
+        /// <summary>
+        /// Get Rough Compensation from Rought
+        /// </summary>
+        /// <param name="pathArgument"></param>
+        /// <returns></returns>
         private double getRoughCompY(PathArgument pathArgument)
         {
-            return -(pathArgument.RoughDia - 200) / 2000.0;
+            // always zero
+            return 0;//-(pathArgument.RoughDia - pathArgument.RoughDia) / 2000.0;
         }
 
         private double getFinishCompY(PathArgument pathArgument)
         {
-            return -(pathArgument.FinishDia - 200) / 2000.0;
+            return -(pathArgument.FinishDia - pathArgument.RoughDia) / 2000.0;
         }
 
         private double getRoughFeed(PathArgument pathArgument)
         {
             if (pathArgument.RoughDia == 250)
-                return 20.0;
+                return 30.0;
             else if (pathArgument.RoughDia == 375)
                 return 25.0;
             else if (pathArgument.RoughDia == 500)
-                return 35.0;
+                return 36.0;
 
             return 20.0;
         }
@@ -327,24 +334,24 @@ namespace SoftJawCut
         private double getFinishFeed(PathArgument pathArgument)
         {
             if (pathArgument.FinishDia == 250)
-                return 6.0;
+                return 40.0;
             else if (pathArgument.RoughDia == 375)
                 return 8.0;
             else if (pathArgument.RoughDia == 500)
-                return 10.0;
+                return 36.0;
 
             return 6.0;
         }
 
-        private int getRPM(PathArgument pathArgument)
+        private int getRoughRPM(PathArgument pathArgument)
         {
             int dia = pathArgument.RoughDia;
             if (dia == 250)
-                return 6500;
+                return 7500;
             else if (dia == 375)
-                return 6500;
+                return 4000;
             else if (dia == 500)
-                return 7000;
+                return 3000;
 
             return 6000;
         }
@@ -353,11 +360,11 @@ namespace SoftJawCut
         {
             int dia = pathArgument.FinishDia;
             if (dia == 250)
-                return 6500;
+                return 6000;
             else if (dia == 375)
-                return 6500;
+                return 4000;
             else if (dia == 500)
-                return 7000;
+                return 3000;
 
             return 6000;
         }
