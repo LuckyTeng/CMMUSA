@@ -162,7 +162,7 @@ namespace SoftJawCut
                 else
                     initY = Math.Min(initY - (sign * getFinishCompY(pathArgument)), targetY) + (sign * getFinishCompY(pathArgument));
 
-                mcs.Add(new FeedCommand { F = getRoughFeed(pathArgument), Y = initY });
+                mcs.Add(new FeedCommand { F = getFinishFeed(pathArgument), Y = initY });
 
                 y = initY - (sign * getFinishCompY(pathArgument));
                 if ( y != targetY ) // not last Y
