@@ -94,6 +94,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HassGCodeProvider.cs" />
+    <Compile Include="ICodeProvider.cs" />
     <Compile Include="PathGenerator.cs" />
     <Compile Include="MachineCommands.cs" />
     <Compile Include="Program.cs" />
