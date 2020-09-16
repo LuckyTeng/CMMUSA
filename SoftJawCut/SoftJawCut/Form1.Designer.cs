@@ -46,10 +46,14 @@
             this.saveDiag = new System.Windows.Forms.SaveFileDialog();
             this.nudCutLen = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbHass = new System.Windows.Forms.RadioButton();
+            this.rbFadal = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCutLen)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -274,11 +278,46 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Cut Length:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbFadal);
+            this.groupBox1.Controls.Add(this.rbHass);
+            this.groupBox1.Location = new System.Drawing.Point(13, 191);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 77);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Machine";
+            // 
+            // rbHass
+            // 
+            this.rbHass.AutoSize = true;
+            this.rbHass.Checked = true;
+            this.rbHass.Location = new System.Drawing.Point(12, 19);
+            this.rbHass.Name = "rbHass";
+            this.rbHass.Size = new System.Drawing.Size(49, 17);
+            this.rbHass.TabIndex = 0;
+            this.rbHass.TabStop = true;
+            this.rbHass.Text = "Hass";
+            this.rbHass.UseVisualStyleBackColor = true;
+            // 
+            // rbFadal
+            // 
+            this.rbFadal.AutoSize = true;
+            this.rbFadal.Location = new System.Drawing.Point(12, 42);
+            this.rbFadal.Name = "rbFadal";
+            this.rbFadal.Size = new System.Drawing.Size(51, 17);
+            this.rbFadal.TabIndex = 1;
+            this.rbFadal.TabStop = true;
+            this.rbFadal.Text = "Fadal";
+            this.rbFadal.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 319);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nudCutLen);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnChooseFile);
@@ -303,6 +342,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCutLen)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,6 +369,9 @@
         private System.Windows.Forms.SaveFileDialog saveDiag;
         private System.Windows.Forms.NumericUpDown nudCutLen;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbFadal;
+        private System.Windows.Forms.RadioButton rbHass;
     }
 }
 

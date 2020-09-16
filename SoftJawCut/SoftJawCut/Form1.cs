@@ -44,8 +44,13 @@ namespace SoftJawCut
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            HassGCodeProvider provider = new HassGCodeProvider();
+            ICodeProvider provider;
             PathGenerator pathGenerator = new PathGenerator();
+
+            if (rbHass.Checked)
+                provider = new HassGCodeProvider();
+            else
+                provider = new FadalGCodeProvider();
 
             var pa = PathArgumentBuilder.Build(Convert.ToInt32(cbRough.Text),
                                                Convert.ToInt32(cbFinish.Text),
