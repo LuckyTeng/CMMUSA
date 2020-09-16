@@ -56,7 +56,7 @@ namespace SoftJawCut
             mcs.Add(new HomeCommand());
 
             // change tool 10 for rough;
-            mcs.Add(new ToolChangeCommand { ToolNumber = 10 });
+            mcs.Add(new ToolChangeCommand { ToolNumber = 9 });
 
             // spindle on, coolant on
             mcs.Add(new SpindleOnCommand { RPM = getRoughRPM(pathArgument) });
@@ -66,9 +66,16 @@ namespace SoftJawCut
             mcs.Add(new WCSCommand { Offset = 1 });
             mcs.Add(new RapidCommand { X = -0.500, Y = getRoughCompY(pathArgument) }); ;
 
-            mcs.Add(new ToolHeightCompCommand { H = 10, D = 10, Z = CLEARANCE_HEIGHT });
+            mcs.Add(new ToolHeightCompCommand { H = 9, D = 9, Z = CLEARANCE_HEIGHT });
+            
+            // Begin Program Stop
             // check tool height
             mcs.Add(new ProgramStopCommand());
+
+            // program stop will turn spindle coolant off, re-on it
+            mcs.Add(new SpindleOnCommand { RPM = getRoughRPM(pathArgument) });
+            mcs.Add(new CoolantOnCommand());
+            // End Program Stop
 
             roughtPath(pathArgument, mcs, CutDir.Top);
 
@@ -84,7 +91,7 @@ namespace SoftJawCut
             mcs.Add(new OptionStopCommand());
 
             // change tool 9 for finish;
-            mcs.Add(new ToolChangeCommand { ToolNumber = 9 });
+            mcs.Add(new ToolChangeCommand { ToolNumber = 10 });
 
             // spindle on, coolant on
             mcs.Add(new SpindleOnCommand { RPM = getFinishRPM(pathArgument) });
@@ -94,7 +101,7 @@ namespace SoftJawCut
             mcs.Add(new WCSCommand { Offset = 1 });
             mcs.Add(new RapidCommand { X = -0.500, Y = getFinishCompY(pathArgument) }); ;
 
-            mcs.Add(new ToolHeightCompCommand { H = 9, D = 9, Z = CLEARANCE_HEIGHT });
+            mcs.Add(new ToolHeightCompCommand { H = 10, D = 10, Z = CLEARANCE_HEIGHT });
             finishPath(pathArgument, mcs, CutDir.Top);
 
             mcs.Add(new RapidCommand { Z = CLEARANCE_HEIGHT });
@@ -110,7 +117,7 @@ namespace SoftJawCut
             mcs.Add(new SpindleOffCommand());
             mcs.Add(new CoolantOffCommand());
             mcs.Add(new HomeCommand());
-            mcs.Add(new ToolChangeCommand { ToolNumber = 8 });
+            mcs.Add(new ToolChangeCommand { ToolNumber = 9 });
             mcs.Add(new WCSCommand { Offset = 1 });
             mcs.Add(new RapidCommand { X = 0, Y = 5 });
             mcs.Add(new EndProgramCommand());
