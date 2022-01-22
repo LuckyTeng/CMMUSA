@@ -1,3 +1,3 @@
 # CMMUSA
 
-Machining Code Generator
+Machining Code Generator for Setup Fixture Cutting
